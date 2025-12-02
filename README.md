@@ -4,6 +4,21 @@ _Turn your thoughts into real web apps by simply describing them, no coding requ
 
 <img width="200" src="https://octodex.github.com/images/sponsortocat.png" align="right">
 
+## 🚀 Featured App: Terms & Privacy Policy Analyzer
+
+This repository now includes a **Chrome Extension** that uses AI to analyze Terms of Service and Privacy Policies, identifying potentially dangerous or concerning terms.
+
+**[📖 View Extension Documentation](EXTENSION_README.md)** | **[🔧 Installation Guide](INSTALLATION.md)** | **[🧪 Test Page](test-privacy-policy.html)**
+
+### Quick Start
+
+1. Load the extension in Chrome (`chrome://extensions/` → Load unpacked)
+2. Get an OpenAI API key from [platform.openai.com](https://platform.openai.com)
+3. Configure the extension with your API key
+4. Visit any privacy policy page and click "Analyze"
+
+---
+
 The example Spark starter applications in this tutorial were develop in collaboration with real people doing their real jobs.
 
 Special thanks to:
