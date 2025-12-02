@@ -4,13 +4,15 @@
 
 Hey anom1909!
 
-Mona here. I'm done preparing your exercise. Hope you enjoy! 💚
+## 🚀 Featured App: Terms & Privacy Policy Analyzer
 
-Remember, it's self-paced so feel free to take a break! ☕️
+This repository now includes a **Chrome Extension** that uses AI to analyze Terms of Service and Privacy Policies, identifying potentially dangerous or concerning terms.
 
-[![](https://img.shields.io/badge/Go%20to%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/anom1909/skills-idea-to-app-with-spark/issues/2)
+**[📖 View Extension Documentation](EXTENSION_README.md)** | **[🔧 Installation Guide](INSTALLATION.md)** | **[🧪 Test Page](test-privacy-policy.html)**
 
----
+### Quick Start
 
-&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
-
+1. Load the extension in Chrome (`chrome://extensions/` → Load unpacked)
+2. Get an OpenAI API key from [platform.openai.com](https://platform.openai.com)
+3. Configure the extension with your API key
+4. Visit any privacy policy page and click "Analyze"
