@@ -1,5 +1,8 @@
 // Background service worker for Terms & Privacy Policy Analyzer
 
+// Configuration
+const MAX_ANALYSIS_LENGTH = 15000; // Maximum characters to send to LLM
+
 // Listen for messages from popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'analyzeText') {
@@ -67,7 +70,24 @@ Return your response as a JSON array of objects with this structure:
 
 If no concerning terms are found, return an empty array: []`;
 
-    const userPrompt = `Please analyze the following Terms of Service or Privacy Policy text and identify any dangerous or concerning terms:\n\n${text.substring(0, 15000)}`;
+    const userPrompt = `Please analyze the following Terms of Service or Privacy Policy text and identify any dangerous or concerning terms:\n\n${text.substring(0, MAX_ANALYSIS_LENGTH)}`;
+
+    // Prepare request body
+    const requestBody = {
+      model: selectedModel,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt }
+      ],
+      temperature: 0.3,
+      max_tokens: 2000
+    };
+
+    // Add JSON mode for supported models (gpt-3.5-turbo-1106+, gpt-4-turbo-preview+)
+    // Fallback to regular mode for older models
+    if (selectedModel.includes('turbo') || selectedModel.includes('gpt-4')) {
+      requestBody.response_format = { type: "json_object" };
+    }
 
     // Call OpenAI API
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -76,16 +96,7 @@ If no concerning terms are found, return an empty array: []`;
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
       },
-      body: JSON.stringify({
-        model: selectedModel,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt }
-        ],
-        temperature: 0.3,
-        max_tokens: 2000,
-        response_format: { type: "json_object" }
-      })
+      body: JSON.stringify(requestBody)
     });
 
     if (!response.ok) {

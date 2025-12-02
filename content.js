@@ -1,5 +1,8 @@
 // Content script for extracting text from web pages
 
+// Configuration
+const MAX_TEXT_LENGTH = 50000; // Maximum characters to extract from page
+
 // Listen for messages from popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'extractText') {
@@ -49,9 +52,9 @@ function extractPageText() {
     .replace(/\n+/g, '\n') // Replace multiple newlines with single newline
     .trim();
 
-  // Limit text length to avoid overwhelming the API (keep first 50000 chars)
-  if (extractedText.length > 50000) {
-    extractedText = extractedText.substring(0, 50000) + '...';
+  // Limit text length to avoid overwhelming the API
+  if (extractedText.length > MAX_TEXT_LENGTH) {
+    extractedText = extractedText.substring(0, MAX_TEXT_LENGTH) + '...';
   }
 
   return extractedText;
